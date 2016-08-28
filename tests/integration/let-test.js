@@ -30,5 +30,22 @@ describeComponent('let', 'Integration: let helper', {
       expect(render).to.throw(/let helper expects path to be quoteless - got bad instead/);
     });
 
+    it('does not mutate the context', function(){
+      this.set('name', 'Alice');
+      this.render(hbs`{{let name "Bob"}}`);
+      expect(this.get('name')).to.eq('Alice');
+    });
+
+    // it('works correctly in a loop', function(){
+    //   this.set('pets', ['cat', 'dog', 'pig']);
+    //   this.render(hbs`
+    //     {{#each pets as |pet|}}
+    //       {{let name pet}}
+    //       <span class="">{{name}}
+    //     {{/each}}
+    //   `);
+    //   expect(this.get('name')).to.eq('Alice');
+    // });
+
   }
 );
